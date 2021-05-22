@@ -26,7 +26,8 @@ This module also uses the following, but they are not necessary for basic usage.
 ## Usage
 
 ### Asset Locators
- - What it is: An AssetLocator references the corresponding assets in Addressables. 
+ - What it is: 
+   - References a collection of assets in Addressables. 
  - Classes:
    - BaseArrayAssetLocator
    - BaseDictionaryAssetLocator
@@ -37,26 +38,34 @@ This module also uses the following, but they are not necessary for basic usage.
    - 2) Reference them in the MonoBehaviours that need to instantiate or use these assets.
 
 ### Scene Locator
- - What it is: The SceneLocator references a scene and indicates the AssetLocators it will need.
+ - What it is:
+   - References a scene.
+   - References a collection of AssetLocators it will need.
  - Classes:
    - BaseSceneLocator
  - What it does: 
    - Load/unload the referenced scene
    - Mark its Locators with the flag "Remain loaded".
  - What should you do:
-   - 3) Check Example1/SceneHandler.cs for an easy usage.
+   - 3) Check Example1/SceneHandler.cs for easy usage of Load/Unload/CheckFlagRemain.
    - 4) Subscribe to the events to stop/start the gameplay, and show/hide the loading screen.
 
 ### Asset Manager
- - What it is: An index of all the AssetLocators in the game.
+ - What it is: 
+   - An index of all the AssetLocators in the game.
  - Classes:
    - BaseAssetManager
- - What it does: 
-   - The AssetManager keeps the consistency of all the Locators in the game.
-   - What locators should be loaded and unloaded? It decides.
+ - What it does:
+   - Checks all the Locators for the ones that should be Loaded/Unloaded.
  - What should you do:
-   - 5) You only need to extend this and add the references to your custom Asset Locators.
-   - 6) Reference all the AssetLocators in the project.
+   - 5) Reference all the AssetLocators in the project.
+   - 6) Call CheckFlags for it to do it's magic. Again, check Example1/SceneHandler.cs to see when to make the call.
+
+### Order
+1) Check the new map dependencies.
+2) Unload the old map, so there are no active references to any assets.
+3) Trigger AssetManager's checking.
+4) Load the new map.
 
 ### Example implementations
 There are two examples included in the repository. 
@@ -65,8 +74,14 @@ There are two examples included in the repository.
  - Three map scenes, with different dependencies, and a SceneHandler to switch between them.
  - The most important thing to see here is the **SceneHandler** and the three methods that change map.
 
-**Example 2**. 
- - IN DEVELOPMENT.
+**Example 2**. **IN DEVELOPMENT.**
+ - Creates a hierarchy of SceneLocators: Context and Map. Context is over Map.
+ - An instance of both of them will have to be active at the same time.
+ - Only one Context, and one Map, can be active at any given time.
+   - Context: GameWalking, GameTravel, MainMenu.
+   - Map: Map1, Map2, Map3, Overmap.
+ - When you are in GameWalking, you can change between Map1, 2 and 3.
+ - However, when you change the Context to GameTravel, Overmap will be loaded, and any other Map will be unloaded.
 
 
 ## Contents
