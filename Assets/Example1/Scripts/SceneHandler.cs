@@ -37,12 +37,22 @@ namespace AutumnYard.Example1
       if (currentMap == newMap) yield break;
 
       // Trigger the FlagRemain for the assets that should persist
-      maps[(int)newMap].TriggerFlagRemain();
+      maps[(int)newMap].CheckDependenciesAndTriggerRemainFlags();
 
       yield return UnloadMap(currentMap);
+      yield return assetManager.CheckFlagRemains();
       yield return LoadMap(newMap);
     }
 
+    // private IEnumerator UnloadUnnecessaryDependencies()
+    // {
+    //   // Unload asset dependencies without the FlagRemain
+    //   assetManager.GetLoadersToUnload(out List<Loader> toUnload);
+    //   for (int i = 0; i < toUnload.Count; i++)
+    //   {
+    //     yield return toUnload[i].Unload();
+    //   }
+    // }
 
     private IEnumerator UnloadMap(Constants.Map which)
     {
@@ -51,12 +61,6 @@ namespace AutumnYard.Example1
 
       yield return maps[(int)which].Unload();
 
-      // Unload asset dependencies without the FlagRemain
-      assetManager.GetLoadersToUnload(out List<Loader> toUnload);
-      for (int i = 0; i < toUnload.Count; i++)
-      {
-        yield return toUnload[i].Unload();
-      }
     }
 
     private IEnumerator LoadMap(Constants.Map to)

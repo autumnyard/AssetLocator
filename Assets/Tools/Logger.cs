@@ -10,6 +10,7 @@ namespace AutumnYard
       DictAssetLocator = 1 << 1,
       ArrayAssetLocator = 1 << 2,
       MapLocator = 1 << 3,
+      AssetManager = 1 << 4,
     }
 
     static public Type enabledTypes;
@@ -23,7 +24,7 @@ namespace AutumnYard
         // blue brown cyan darkblue green lime magenta maroon olive orange purple red teal yellow
 
         // Directors
-      //   case BaseMapLocator s: return ("orange", "Map Locator", Type.MapLocator);
+        //   case BaseMapLocator s: return ("orange", "Map Locator", Type.MapLocator);
 
         default: return ("white", "-", Type.DictAssetLocator);
       }

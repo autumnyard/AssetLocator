@@ -10,7 +10,7 @@ namespace AutumnYard.Example1
     [SerializeField] private AudioClipDictionaryAssetLocator soundLocator;
     [SerializeField] private PrefabArrayAssetLocator structureLocator;
 
-    public override void TriggerRemainFlags()
+    public override void CheckDependenciesAndTriggerRemainFlags()
     {
       TriggerRemainFlag(soundLocator);
       TriggerRemainFlag(structureLocator);

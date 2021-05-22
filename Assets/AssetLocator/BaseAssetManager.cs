@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,25 @@ namespace AutumnYard
         }
       }
     }
+
+    public IEnumerator CheckFlagRemains()
+    {
+      for (int i = 0; i < loaders.Length; i++)
+      {
+        Log($"Check locator {loaders[i].name}");
+        if (loaders[i].CheckFlagRemainAndClear())
+        {
+          yield return loaders[i].Load();
+        }
+        else
+        {
+          yield return loaders[i].Unload();
+        }
+      }
+    }
+
+    protected void Log(string text) => Logger.Log(text, Logger.Type.AssetManager);
+    protected void LogError(string text) => Logger.LogError(text, Logger.Type.AssetManager);
 
   }
 }

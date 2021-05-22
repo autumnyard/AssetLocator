@@ -63,11 +63,14 @@ namespace AutumnYard
 
     public override IEnumerator Load()
     {
+
       if (data != null && data.Count > 0)
       {
         Log($"Already loaded: {name}");
         yield break;
       }
+
+      Debug.Log($"       +++ triggering for {name}");
 
       if (string.IsNullOrEmpty(label.labelString)) throw new NullReferenceException($"Invalid AssetLabelReference in {name}");
 
@@ -87,17 +90,20 @@ namespace AutumnYard
 
     public override IEnumerator Unload()
     {
+
       if (data == null || data.Count == 0)
       {
         Log($"No need to unload: {name}");
-        Debug.Log($"No need to unload: {name}");
+        // Debug.Log($"No need to unload: {name}");
         yield break;
       }
+
+      Debug.Log($"       --- triggering for {name}");
 
       // data.Clear(); // Not clearing a Dict preserves the allocated space for longer
       data = null;
       Addressables.Release(asyncHandle);
-      Debug.Log($"Unloaded {name}!");
+      // Debug.Log($"Unloaded {name}!");
       Log($"Unloaded {name}!");
     }
 

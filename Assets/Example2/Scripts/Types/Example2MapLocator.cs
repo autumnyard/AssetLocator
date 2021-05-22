@@ -12,7 +12,7 @@ namespace AutumnYard.Example2
     [SerializeField] private SpriteArrayAssetLocator effectsLocator;
 
 
-    public override void TriggerRemainFlags()
+    public override void CheckDependenciesAndTriggerRemainFlags()
     {
       // TriggerRemainFlag(soundLocator);
       // TriggerRemainFlag(structureLocator);
