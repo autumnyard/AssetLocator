@@ -19,29 +19,17 @@ It provides a facade to the Addressables system, and an intuitive way to manage 
 I'm assuming familiarity with the following concepts:
 - Unity Addresables system.
 
-This module also uses the following, and therefore they are necessary for extension or improvements:
+This module also uses the following, but they are not necessary for basic usage. However, they are necessary for extension:
 - ScriptableObjects.
 - C#'s generics and interfaces.
 
-If you're not familiar with them, take a look at the **Bibliography** section, or search for resources.
-
-
 ## Usage
-
-There are four important types:
-
-The Asset Locators:
- - BaseArrayAssetLocator
- - BaseDictionaryAssetLocator
-
- The Scene Locator:
- - BaseSceneLocator
-
-The Asset Manager:
- - BaseAssetManager
 
 ### Asset Locators
  - What it is: An AssetLocator references the corresponding assets in Addressables. 
+ - Classes:
+   - BaseArrayAssetLocator
+   - BaseDictionaryAssetLocator
  - What it does: Manages the loading/unloading of the AssetBundles for these assets.
  - What should you do:
    - 1) Inherit these with the types needed in the project.   
@@ -49,6 +37,8 @@ The Asset Manager:
 
 ### Scene Locator
  - What it is: The SceneLocator references a scene and indicates the AssetLocators it will need.
+ - Classes:
+   - BaseSceneLocator
  - What it does: This will load/unload the scene, and call the AssetLocators that need to load/unload.
  - What should you do:
    - 3) Check Example1/SceneHandler.cs for an easy usage.
@@ -56,6 +46,8 @@ The Asset Manager:
 
 ### Asset Manager
  - What it is: The AssetManager keeps the consistency of all the Locators in the game.
+ - Classes:
+   - BaseAssetManager
  - What it does: It will be called automatically by the AssetLocators.
  - What should you do:
    - 5) You only need to extend this and add the references to your custom Asset Locators.
@@ -70,7 +62,8 @@ There are two examples included in the repository.
 
 
 ## Contents
-- **AssetLoader module**
+- **AssetLoader**
+    - BaseAssetManager
     - Interfaces
         - ILoader
         - ISceneLocator
@@ -80,13 +73,11 @@ There are two examples included in the repository.
         - BaseSceneLocator
         - BaseArrayAssetLocator
         - BaseDictionaryAssetLocator
-    - Other
-        - AssetManager
-- **Example 1**. One possible use case: 
+- **Example1**. One possible use case: 
     - Three map scenes, with different dependencies, and a SceneHandler to switch between them.
-- **Example 2**
+- **Example2**
     - Another possible use case. IN DEVELOPMENT.
-- **Extra tools**
+- **Tools**
     - Some extra helper tools I use during development of this module.
     - Unrelated to the module, and therefore unnecessary for it to work. Feel free to ignore them.
 
