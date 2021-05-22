@@ -1,0 +1,21 @@
+using System.Collections;
+using UnityEngine;
+
+namespace AutumnYard.Example2
+{
+  [CreateAssetMenu(fileName = "Example2 Map Locator", menuName = "Autumn Yard/Example2 Map Locator", order = 140)]
+  public sealed class Example2MapLocator : BaseMapLocator
+  {
+    [Header("Dependencies: Enum dependant")]
+    [SerializeField] private PrefabArrayAssetLocator structureLocator;
+    [SerializeField] private AudioClipDictionaryAssetLocator soundLocator;
+    [SerializeField] private SpriteArrayAssetLocator effectsLocator;
+
+    protected override IEnumerator LoadDependenciesOnly()
+    {
+      yield return CheckDependency(soundLocator);
+      yield return CheckDependency<GameObject, Constants.Structure>(structureLocator);
+      yield return CheckDependency<Sprite, Constants.Effect>(effectsLocator);
+    }
+  }
+}
