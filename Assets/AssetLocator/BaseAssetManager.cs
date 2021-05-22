@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,11 @@ namespace AutumnYard
   {
     [SerializeField] private Loader[] loaders;
 
-    public void GetLoadersToUnload(out List<Loader> toUnload)
-    {
-      toUnload = new List<Loader>(loaders.Length);
-      for (int i = 0; i < loaders.Length; i++)
-      {
-        if (!loaders[i].CheckFlagRemainAndClear())
-        {
-          toUnload.Add(loaders[i]);
-        }
-      }
-    }
-
+    /// <summary>
+    /// Calls Load/Unload on the assets using their RemainFlag flags.
+    /// </summary>
     public IEnumerator CheckFlagRemains()
     {
-
       Logger.EmptyLine(Logger.Type.Example1);
 
       for (int i = 0; i < loaders.Length; i++)
@@ -37,6 +28,29 @@ namespace AutumnYard
         else
         {
           yield return loaders[i].Unload();
+        }
+      }
+    }
+
+    /// <summary>
+    /// Returns a list of loaders to load and unload. <b>Only returns the lists</b>
+    /// </summary>
+    /// <param name="toUnload">The List of managers that should be unloaded.</param>
+    [Obsolete("GetLoadersToUnload is deprecated, please use CheckFlagRemains instead.")]
+    public void GetLoadersToUnload(out List<Loader> toLoad, out List<Loader> toUnload)
+    {
+      toLoad = new List<Loader>(loaders.Length);
+      toUnload = new List<Loader>(loaders.Length);
+
+      for (int i = 0; i < loaders.Length; i++)
+      {
+        if (loaders[i].CheckFlagRemainAndClear())
+        {
+          toLoad.Add(loaders[i]);
+        }
+        else
+        {
+          toUnload.Add(loaders[i]);
         }
       }
     }
