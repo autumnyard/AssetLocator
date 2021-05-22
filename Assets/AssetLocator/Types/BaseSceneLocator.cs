@@ -11,7 +11,7 @@ namespace AutumnYard
   public abstract class BaseSceneLocator : ScriptableObject, ILoader, ISceneLocator
   {
     [Header("Map")]
-    // TODO: Issue #3.
+    // TODO: Issue #1.
     // [SerializeField] private string map; 
     [SerializeField] private AssetReference sceneRef;
 
@@ -28,7 +28,7 @@ namespace AutumnYard
       }
       else
       {
-        // TODO: Issue #4. This dependency should be unloaded.
+        // TODO: Issue #2. This dependency should be unloaded.
       }
     }
 
@@ -42,7 +42,7 @@ namespace AutumnYard
       }
       else
       {
-        // TODO: Issue #4. This dependency should be unloaded.
+        // TODO: Issue #2. This dependency should be unloaded.
       }
     }
 
@@ -93,7 +93,7 @@ namespace AutumnYard
 
       {
         Log($"Begin unloading map {sceneRef.SubObjectName}...");
-        // TODO: Issue #3.
+        // TODO: Issue #1.
         // if (sceneRef.Asset == null)
         // {
         //   Log($" ... it was already present when you pressed Play. Unload normally {map}");
