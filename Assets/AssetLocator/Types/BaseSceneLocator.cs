@@ -10,26 +10,42 @@ namespace AutumnYard
 {
   public abstract class BaseSceneLocator : Loader, ISceneLocator
   {
-    [Header("Map")]
+    [Header("Scene")]
     // TODO: Issue #1.
     // [SerializeField] private string map; 
-    [SerializeField] private AssetReference sceneRef;
+    [SerializeField] private AssetReference sceneReference;
+    [SerializeField] private Loader[] dependencies;
 
     private AsyncOperationHandle<SceneInstance> asyncOp;
 
 
     #region Map Locator
 
-
-    public abstract void CheckDependenciesAndTriggerRemainFlags();
+    public void CheckDependenciesAndTriggerRemainFlags()
+    {
+      for (int i = 0; i < dependencies.Length; i++)
+      {
+        TriggerRemainFlag(dependencies[i]);
+      }
+    }
 
     protected virtual void TriggerRemainFlag(Loader which)
     {
       if (which != null)
+      {
         which.TriggerFlagRemain();
+      }
     }
 
-    protected abstract IEnumerator LoadDependenciesOnly();
+
+    [Obsolete("LoadDependenciesOnly is deprecated, please use AssetManager.CheckFlagRemains instead. Dependencies should be Loaded/Unloaded on the AssetManager, not here.")]
+    protected IEnumerator LoadDependenciesOnly()
+    {
+      for (int i = 0; i < dependencies.Length; i++)
+      {
+        yield return LoadDependency(dependencies[i]);
+      }
+    }
 
     protected IEnumerator LoadDependency(Loader which)
     {
@@ -42,9 +58,9 @@ namespace AutumnYard
 
     private IEnumerator LoadMapOnly()
     {
-      Log($" ... loading scene {sceneRef.SubObjectName}...");
+      Log($" ... loading scene {sceneReference.SubObjectName}...");
       {
-        asyncOp = Addressables.LoadSceneAsync(sceneRef, LoadSceneMode.Additive, false);
+        asyncOp = Addressables.LoadSceneAsync(sceneReference, LoadSceneMode.Additive, false);
         yield return asyncOp;
       }
       Log($" ... finished with result: {asyncOp.Status}");
@@ -83,7 +99,7 @@ namespace AutumnYard
       OnUnloadingBegin?.Invoke();
 
       {
-        Log($"Begin unloading map {sceneRef.SubObjectName}...");
+        Log($"Begin unloading map {sceneReference.SubObjectName}...");
         // TODO: Issue #1.
         // if (sceneRef.Asset == null)
         // {

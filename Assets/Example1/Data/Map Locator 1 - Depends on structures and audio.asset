@@ -16,5 +16,6 @@ MonoBehaviour:
     m_AssetGUID: f8599be36a8950b4cbb71b506187e6fd
     m_SubObjectName: 
     m_SubObjectType: 
-  soundLocator: {fileID: 11400000, guid: 571b89c0236b22248a753f4c321627a5, type: 2}
-  structureLocator: {fileID: 11400000, guid: 1f4936987ad04d7478debac30dc26332, type: 2}
+  dependencies:
+  - {fileID: 11400000, guid: 571b89c0236b22248a753f4c321627a5, type: 2}
+  - {fileID: 11400000, guid: 1f4936987ad04d7478debac30dc26332, type: 2}
