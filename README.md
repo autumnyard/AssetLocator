@@ -1,13 +1,14 @@
 # AssetLocator
 
-Unity module to manage asset references and dependencies between scenes using Addressables.
+## Description
+**AssetLocator** works as the basis for a module that manages the assets that are generated dynamically on a project, and their dependencies. It provides a facade to the Addressables system, and a workflow using explicit references and dependencies with ScriptableObjects called Locators.
 
-### Goal
+## Goal
 - Provide a facade to work with Addressables in an easy and intuitive way.
 - Force the developers to keep track of all the assets and their dependencies, making memory management part of the development cycle.
 - Allowing for a seamless editor workflow.
 
-### Considerations
+## Considerations
 I'm assuming familiarity with the following concepts:
 - Unity Addresables system.
 - ScriptableObjects.
@@ -15,7 +16,7 @@ I'm assuming familiarity with the following concepts:
 
 If you're not familiar with them, take a look at the **Bibliography** section, or search for resources.
 
-### Contents
+## Contents
 - **AssetLoader module**
     - Interfaces
         - ILoader
@@ -36,16 +37,19 @@ If you're not familiar with them, take a look at the **Bibliography** section, o
     - Some extra helper tools I use during development of this module.
     - Unrelated to the module, and therefore unnecessary for it to work. Feel free to ignore them.
 
-### Usage
+## Usage
 Extending the base types with the ones needed in the project.
+Check **Example 1** and **Example 2** for ideas.
 
-### Bibliography
+## Bibliography
  * Unity Addresables system
  * ScriptableObjects
  * C# interface and generics
 
-## About
+## About & License
 Made by **Autumn Yard (Pablo de la Ossa)**
 Find me at: 
  * http://autumnyard.com
  * http://pablodelaossa.es
+
+AssetLocator is licensed under the GPL version 3 License. For more information check the LICENSE.md file or the gnu website.
