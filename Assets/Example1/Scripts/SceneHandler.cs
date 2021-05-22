@@ -8,12 +8,12 @@ namespace AutumnYard.Example1
     private Constants.Map currentMap = Constants.Map.None;
 
     [SerializeField] private Example1MapLocator[] maps;
-    [SerializeField] private Logger.Type enableTypes;
+    [SerializeField] private Logger.Type enableLoggingTypes;
 
 
     private void Awake()
     {
-      Logger.enabledTypes = enableTypes;
+      Logger.enabledTypes = enableLoggingTypes;
     }
 
 #if UNITY_EDITOR
