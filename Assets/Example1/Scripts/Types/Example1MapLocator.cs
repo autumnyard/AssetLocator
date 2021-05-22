@@ -7,17 +7,19 @@ namespace AutumnYard.Example1
   public sealed class Example1MapLocator : BaseSceneLocator
   {
     [Header("Dependencies: Explicit dependencies")]
-
-    [Header("Dictionaries")]
     [SerializeField] private AudioClipDictionaryAssetLocator soundLocator;
-
-    [Header("Data-dependant")]
     [SerializeField] private PrefabArrayAssetLocator structureLocator;
+
+    public override void TriggerRemainFlags()
+    {
+      TriggerRemainFlag(soundLocator);
+      TriggerRemainFlag(structureLocator);
+    }
 
     protected override IEnumerator LoadDependenciesOnly()
     {
-      yield return CheckDependency(soundLocator);
-      yield return CheckDependency<GameObject>(structureLocator);
+      yield return LoadDependency(soundLocator);
+      yield return LoadDependency(structureLocator);
     }
 
   }

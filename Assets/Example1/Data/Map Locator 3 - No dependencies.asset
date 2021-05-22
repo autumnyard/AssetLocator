@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d0244acb1ce0004483619fe3b2c1efa, type: 3}
-  m_Name: Map Locator 3
+  m_Name: Map Locator 3 - No dependencies
   m_EditorClassIdentifier: 
   sceneRef:
     m_AssetGUID: 33a9f3153fc5e3e4ab04695dffbb2e41

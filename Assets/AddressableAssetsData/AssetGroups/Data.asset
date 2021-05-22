@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Prefabs
+  m_Name: Data
   m_EditorClassIdentifier: 
-  m_GroupName: Prefabs
+  m_GroupName: Data
   m_Data:
     m_SerializedData: []
   m_GUID: 9b29b004845b9de478cdd53597c1e50e
@@ -22,6 +22,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Structures
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 252cca623e46a664782dab59b594c089
+    m_Address: Assets/Example1/Data/Audio
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound Effects
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0

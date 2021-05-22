@@ -12,7 +12,7 @@ namespace AutumnYard.Example2
     [Header("Assets")]
     [Header("Generic dictionaries, accessible with string")]
     [SerializeField] private SpriteDictionaryAssetLocator[] spriteLocators;
-    [SerializeField] private AudioClipDictionaryAssetLocator[] audioClipLocators;
+    // [SerializeField] private AudioClipDictionaryAssetLocator[] audioClipLocators;
     [SerializeField] private PrefabDictionaryAssetLocator[] prefabLocators;
 
     [Header("Context")]
@@ -41,13 +41,13 @@ namespace AutumnYard.Example2
         }
       }
 
-      if (audioClipLocators != null)
-      {
-        for (int i = 0; i < audioClipLocators.Length; i++)
-        {
-          yield return audioClipLocators[i].Load();
-        }
-      }
+      // if (audioClipLocators != null)
+      // {
+      //   for (int i = 0; i < audioClipLocators.Length; i++)
+      //   {
+      //     yield return audioClipLocators[i].Load();
+      //   }
+      // }
       if (prefabLocators != null)
       {
         for (int i = 0; i < prefabLocators.Length; i++)

@@ -5,15 +5,15 @@ namespace AutumnYard
 {
   public interface ILoader
   {
+    bool IsLoaded { get; }
+
     event Action OnUnloadingBegin;
     event Action OnUnloadingFinish;
     event Action OnLoadingBegin;
     event Action OnLoadingFinish;
 
-    bool IsLoaded { get; }
-
-    void SetFlagRemain();
-    bool CheckFlagRemain();
+    void TriggerFlagRemain();
+    bool CheckFlagRemainAndClear();
 
     IEnumerator Load();
     IEnumerator Unload();

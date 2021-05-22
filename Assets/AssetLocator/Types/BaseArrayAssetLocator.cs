@@ -32,11 +32,11 @@ namespace AutumnYard
 
     private void OnEnable()
     {
+      IsLoaded = false;
       if (data == null) return;
 
       data.Clear();
       data = null;
-      IsLoaded = false;
     }
 
     private void OnValidate()
@@ -72,6 +72,7 @@ namespace AutumnYard
 
       Log($"  ... finished!");
       OnLoadingFinish?.Invoke();
+      Debug.Log("ap;osdjfpoasjdofpas");
       IsLoaded = true;
 
       void HandleAssetLoad(T asset) => data.Add(asset);
@@ -79,8 +80,18 @@ namespace AutumnYard
 
     public override IEnumerator Unload()
     {
-      // TODO: Issue #6: Unload assets
-      throw new NotImplementedException("Unloading assets");
+      if (data == null || data.Count == 0)
+      {
+        Log($"No need to unload: {name}");
+        Debug.Log($"No need to unload: {name}");
+        yield break;
+      }
+
+      // data.Clear(); // Not clearing a List preserves the allocated space for longer
+      data = null;
+      Addressables.Release(asyncHandle);
+      Debug.Log($"Unloaded {name}!");
+      Log($"Unloaded {name}!");
     }
 
     #endregion // ILoader

@@ -11,16 +11,25 @@ namespace AutumnYard
     protected bool flagRemain = false;
 
     public abstract event Action OnUnloadingBegin;
-    public virtual event Action OnUnloadingFinish;
+    public abstract event Action OnUnloadingFinish;
     public abstract event Action OnLoadingBegin;
-    public virtual event Action OnLoadingFinish;
+    public abstract event Action OnLoadingFinish;
 
-    public void SetFlagRemain() => flagRemain = true;
+    public void TriggerFlagRemain()
+    {
+      flagRemain = true;
+    }
 
-    public bool CheckFlagRemain() => flagRemain;
+    public bool CheckFlagRemainAndClear()
+    {
+      bool temp = flagRemain;
+      flagRemain = false;
+      return temp;
+    }
 
     public abstract IEnumerator Load();
 
     public abstract IEnumerator Unload();
+
   }
 }

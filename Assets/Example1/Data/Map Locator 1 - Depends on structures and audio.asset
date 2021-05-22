@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d0244acb1ce0004483619fe3b2c1efa, type: 3}
-  m_Name: Map Locator 1
+  m_Name: Map Locator 1 - Depends on structures and audio
   m_EditorClassIdentifier: 
   sceneRef:
     m_AssetGUID: f8599be36a8950b4cbb71b506187e6fd
     m_SubObjectName: 
     m_SubObjectType: 
-  dependencies: []
+  soundLocator: {fileID: 11400000, guid: 571b89c0236b22248a753f4c321627a5, type: 2}
   structureLocator: {fileID: 11400000, guid: 1f4936987ad04d7478debac30dc26332, type: 2}
-  soundLocator: {fileID: 0}
-  effectsLocator: {fileID: 0}

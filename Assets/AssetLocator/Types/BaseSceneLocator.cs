@@ -20,33 +20,25 @@ namespace AutumnYard
 
     #region Map Locator
 
-    protected IEnumerator CheckDependency(ILoader which)
-    {
-      if (which != null)
-      {
-        which.SetFlagRemain();
-        yield return which.Load();
-      }
-      else
-      {
-        // TODO: Issue #2. This dependency should be unloaded.
-      }
-    }
 
-    protected IEnumerator CheckDependency<T>(IArrayAssetLocator<T> which)
-      where T : UnityEngine.Object
+    public abstract void TriggerRemainFlags();
+
+    protected virtual void TriggerRemainFlag(Loader which)
     {
       if (which != null)
-      {
-        yield return which.Load();
-      }
-      else
-      {
-        // TODO: Issue #2. This dependency should be unloaded.
-      }
+        which.TriggerFlagRemain();
     }
 
     protected abstract IEnumerator LoadDependenciesOnly();
+
+    protected IEnumerator LoadDependency(Loader which)
+    {
+      if (which != null)
+      {
+        yield return which.Load();
+      }
+    }
+
 
     private IEnumerator LoadMapOnly()
     {
@@ -103,6 +95,7 @@ namespace AutumnYard
         // {
         asyncOp = Addressables.UnloadSceneAsync(asyncOp, true);
         yield return asyncOp;
+        // Addressables already takes care of all the automatic dependencies
         Log($" ... finished!");
         // }
       }

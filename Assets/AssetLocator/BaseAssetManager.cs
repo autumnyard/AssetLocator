@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +13,10 @@ namespace AutumnYard
       toUnload = new List<Loader>(loaders.Length);
       for (int i = 0; i < loaders.Length; i++)
       {
-        if (!loaders[i].CheckFlagRemain()) toUnload.Add(loaders[i]);
+        if (!loaders[i].CheckFlagRemainAndClear())
+        {
+          toUnload.Add(loaders[i]);
+        }
       }
     }
 

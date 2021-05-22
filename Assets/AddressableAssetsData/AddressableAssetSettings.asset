@@ -75,6 +75,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Structures
+    - Sound Effects
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 86b64852bdf2e8644ba51aac7fb7d814, type: 2}
