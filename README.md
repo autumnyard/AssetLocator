@@ -5,7 +5,7 @@
 
 ## Goal
 - Provide a facade to work with Addressables in an easy and intuitive way.
-- Force the developers to keep track of all the assets and their dependencies, making memory management part of the development cycle.
+- Force the developers to keep track of all the assets and their dependencies, making memory management a conscious part of the development cycle.
 - Allowing for a seamless editor workflow.
 
 ## Considerations
@@ -20,17 +20,17 @@ If you're not familiar with them, take a look at the **Bibliography** section, o
 - **AssetLoader module**
     - Interfaces
         - ILoader
-        - IMapLocator
+        - ISceneLocator
         - IArrayAssetLocator
         - IDictionaryAssetLocator
     - Generic Asset Locators
-        - BaseMapLocator
+        - BaseSceneLocator
         - BaseArrayAssetLocator
         - BaseDictionaryAssetLocator
     - Other
         - AssetManager
-- **Example 1**
-    - One possible use case: Three maps, with different dependencies, and a SceneHandler to switch between them.
+- **Example 1**. One possible use case: 
+    - Three map scenes, with different dependencies, and a SceneHandler to switch between them.
 - **Example 2**
     - Another possible use case. IN DEVELOPMENT.
 - **Extra tools**

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -9,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace AutumnYard
 {
-  public abstract class BaseMapLocator : ScriptableObject, ILoader
+  public abstract class BaseSceneLocator : ScriptableObject, ILoader, ISceneLocator
   {
     [Header("Map")]
     // TODO: Issue #3.

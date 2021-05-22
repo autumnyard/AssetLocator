@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AutumnYard.Example2
 {
   [CreateAssetMenu(fileName = "Example2 Map Locator", menuName = "Autumn Yard/Example2 Map Locator", order = 140)]
-  public sealed class Example2MapLocator : BaseMapLocator
+  public sealed class Example2MapLocator : BaseSceneLocator
   {
     [Header("Dependencies: Enum dependant")]
     [SerializeField] private PrefabArrayAssetLocator structureLocator;
