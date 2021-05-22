@@ -5,5 +5,6 @@ namespace AutumnYard.Example1
   {
     public enum Map { None = -1, Map1, Map2, Map3 }
     public enum Structure { None, Bonfire, Chair, Lamp }
+    public enum Audio { None, Accept, DoorOpen, EatApple, Teleport }
   }
 }

@@ -11,6 +11,8 @@ namespace AutumnYard
       ArrayAssetLocator = 1 << 2,
       MapLocator = 1 << 3,
       AssetManager = 1 << 4,
+      Example1 = 1 << 5,
+      Example2 = 1 << 6,
     }
 
     static public Type enabledTypes;
@@ -65,7 +67,6 @@ namespace AutumnYard
 #endif
     }
 
-
     public static void LogError(this Object obj, string message)
     {
       LogError(message, obj);
@@ -96,6 +97,15 @@ namespace AutumnYard
 #else
       Debug.LogError($"{message}");
 #endif
+#endif
+    }
+
+    public static void EmptyLine(Type type)
+    {
+#if LOGGING
+      if (!enabledTypes.HasFlag(type)) return;
+
+      Debug.Log("");
 #endif
     }
 

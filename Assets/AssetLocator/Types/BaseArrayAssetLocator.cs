@@ -61,7 +61,7 @@ namespace AutumnYard
         yield break;
       }
 
-      Debug.Log($"       +++ triggering for {name}");
+      Logger.Log($"  ... <b>Yes!</b> <color=green>Load</color> {name}", Logger.Type.Example1);
 
       if (string.IsNullOrEmpty(label.labelString)) throw new NullReferenceException($"Invalid AssetLabelReference in {name}");
 
@@ -84,16 +84,14 @@ namespace AutumnYard
       if (data == null || data.Count == 0)
       {
         Log($"No need to unload: {name}");
-        // Debug.Log($"No need to unload: {name}");
         yield break;
       }
 
-      Debug.Log($"       --- triggering for {name}");
+      Logger.Log($"  ... <b>Yes!</b> <color=red>Unload</color> {name}", Logger.Type.Example1);
 
       // data.Clear(); // Not clearing a List preserves the allocated space for longer
       data = null;
       Addressables.Release(asyncHandle);
-      // Debug.Log($"Unloaded {name}!");
       Log($"Unloaded {name}!");
     }
 

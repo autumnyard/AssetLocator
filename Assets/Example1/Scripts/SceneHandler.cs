@@ -44,23 +44,12 @@ namespace AutumnYard.Example1
       yield return LoadMap(newMap);
     }
 
-    // private IEnumerator UnloadUnnecessaryDependencies()
-    // {
-    //   // Unload asset dependencies without the FlagRemain
-    //   assetManager.GetLoadersToUnload(out List<Loader> toUnload);
-    //   for (int i = 0; i < toUnload.Count; i++)
-    //   {
-    //     yield return toUnload[i].Unload();
-    //   }
-    // }
-
     private IEnumerator UnloadMap(Constants.Map which)
     {
       if (which == Constants.Map.None) yield break;
       if (!maps[(int)which].IsLoaded) yield break;
 
       yield return maps[(int)which].Unload();
-
     }
 
     private IEnumerator LoadMap(Constants.Map to)

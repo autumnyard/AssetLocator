@@ -74,7 +74,6 @@ namespace AutumnYard
     {
       Log($"Begin loading map {name}...");
       OnLoadingBegin?.Invoke();
-      // yield return LoadDependenciesOnly();
       yield return LoadMapOnly();
     }
 

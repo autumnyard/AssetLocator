@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6e5bb9bd80ffb4a8bf6a3ed26ae170, type: 3}
-  m_Name: Map Locator 1
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Example 1 Maps_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  map: 
-  sceneRef:
-    m_AssetGUID: f8599be36a8950b4cbb71b506187e6fd
-    m_SubObjectName: 
-    m_SubObjectType: 
-  dependencies: []
+  m_Group: {fileID: 11400000, guid: 9396533eda62bda48adca79cc119b038, type: 2}
+  m_StaticContent: 0

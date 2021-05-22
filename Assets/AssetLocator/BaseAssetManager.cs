@@ -23,9 +23,13 @@ namespace AutumnYard
 
     public IEnumerator CheckFlagRemains()
     {
+
+      Logger.EmptyLine(Logger.Type.Example1);
+
       for (int i = 0; i < loaders.Length; i++)
       {
-        Log($"Check locator {loaders[i].name}");
+        Logger.Log($"Should we do something with {loaders[i].name}?", Logger.Type.Example1);
+
         if (loaders[i].CheckFlagRemainAndClear())
         {
           yield return loaders[i].Load();

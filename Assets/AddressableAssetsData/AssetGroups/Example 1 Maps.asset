@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Maps
+  m_Name: Example 1 Maps
   m_EditorClassIdentifier: 
-  m_GroupName: Maps
+  m_GroupName: Example 1 Maps
   m_Data:
     m_SerializedData: []
   m_GUID: 3a875ca27ae368a4d95f4a6e8cc12a66
