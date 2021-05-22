@@ -62,9 +62,9 @@ This module also uses the following, but they are not necessary for basic usage.
    - 6) Call CheckFlags for it to do it's magic. Again, check Example1/SceneHandler.cs to see when to make the call.
 
 ### Order
-1) Check the new map dependencies.
+1) Check the new map's dependencies, and set the FlagRemains accordingly.
 2) Unload the old map, so there are no active references to any assets.
-3) Trigger AssetManager's checking.
+3) Call AssetManager to trigger Locators loading or unloading as needed.
 4) Load the new map.
 
 ### Example implementations
