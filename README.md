@@ -41,26 +41,25 @@ The Asset Manager:
  - BaseAssetManager
 
 ### Asset Locators
-First of all, inherit these with the types needed in the project. 
-
-They will reference the corresponding assets in Addressables. 
-
-Reference them in the MonoBehaviours that need to instantiate or use these assets.
+ - What it is: An AssetLocator references the corresponding assets in Addressables. 
+ - What it does: Manages the loading/unloading of the AssetBundles for these assets.
+ - What should you do:
+   - 1) Inherit these with the types needed in the project.   
+   - 2) Reference them in the MonoBehaviours that need to instantiate or use these assets.
 
 ### Scene Locator
-The SceneLocator references a scene and indicates the AssetLocators it will need.
-
-This is where the actual loading/unloading will be called from.
-
-Subscribe to the events to stop/start the gameplay, and show/hide the loading screen.
-Check Example1/SceneHandler.cs for an easy usage.
+ - What it is: The SceneLocator references a scene and indicates the AssetLocators it will need.
+ - What it does: This will load/unload the scene, and call the AssetLocators that need to load/unload.
+ - What should you do:
+   - 3) Check Example1/SceneHandler.cs for an easy usage.
+   - 4) Subscribe to the events to stop/start the gameplay, and show/hide the loading screen.
 
 ### Asset Manager
-The AssetManager keeps the consistency of all the Locators in the game.
-
-It will be called automatically by the AssetLocators.
-
-You only need to extend this and add the references to your custom Asset Locators.
+ - What it is: The AssetManager keeps the consistency of all the Locators in the game.
+ - What it does: It will be called automatically by the AssetLocators.
+ - What should you do:
+   - 5) You only need to extend this and add the references to your custom Asset Locators.
+   - 6) Reference all the AssetLocators in the project.
 
 ### Example implementations
 There are two examples included in the repository. 
