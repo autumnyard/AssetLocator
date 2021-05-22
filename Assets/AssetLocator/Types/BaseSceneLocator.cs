@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace AutumnYard
 {
-  public abstract class BaseSceneLocator : ScriptableObject, ILoader, ISceneLocator
+  public abstract class BaseSceneLocator : Loader, ISceneLocator
   {
     [Header("Map")]
     // TODO: Issue #1.
@@ -24,6 +24,7 @@ namespace AutumnYard
     {
       if (which != null)
       {
+        which.SetFlagRemain();
         yield return which.Load();
       }
       else
@@ -32,13 +33,12 @@ namespace AutumnYard
       }
     }
 
-    protected IEnumerator CheckDependency<T, TEnum>(IArrayAssetLocator<T> which)
+    protected IEnumerator CheckDependency<T>(IArrayAssetLocator<T> which)
       where T : UnityEngine.Object
-      where TEnum : struct, Enum
     {
       if (which != null)
       {
-        yield return which.Load<TEnum>();
+        yield return which.Load();
       }
       else
       {
@@ -72,13 +72,13 @@ namespace AutumnYard
 
     #region ILoader
 
-    public event Action OnLoadingBegin;
-    public event Action OnLoadingFinish;
-    public event Action OnUnloadingBegin;
-    public event Action OnUnloadingFinish;
+    public override event Action OnUnloadingBegin;
+    public override event Action OnUnloadingFinish;
+    public override event Action OnLoadingBegin;
+    public override event Action OnLoadingFinish;
 
-    public bool IsLoaded { get; private set; }
-    public virtual IEnumerator Load()
+
+    public override IEnumerator Load()
     {
       Log($"Begin loading map {name}...");
       OnLoadingBegin?.Invoke();
@@ -86,7 +86,7 @@ namespace AutumnYard
       yield return LoadMapOnly();
     }
 
-    public virtual IEnumerator Unload()
+    public override IEnumerator Unload()
     {
       Log($"Unloading map {name}...");
       OnUnloadingBegin?.Invoke();

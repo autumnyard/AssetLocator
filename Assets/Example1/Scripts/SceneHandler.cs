@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutumnYard.Example1
@@ -7,6 +8,7 @@ namespace AutumnYard.Example1
   {
     private Constants.Map currentMap = Constants.Map.None;
 
+    [SerializeField] private BaseAssetManager assetManager;
     [SerializeField] private Example1MapLocator[] maps;
     [SerializeField] private Logger.Type enableLoggingTypes;
 
@@ -35,6 +37,18 @@ namespace AutumnYard.Example1
       if (!maps[(int)which].IsLoaded) yield break;
 
       yield return maps[(int)which].Unload();
+
+      // Unload unneeded assets
+      {
+        assetManager.GetLoadersToUnload(out List<Loader> toUnload);
+
+        Debug.Log($"Marked to unload {toUnload.Count} locators...");
+        for (int i = 0; i < toUnload.Count; i++)
+        {
+          Debug.Log($"  ...gonna unload: {toUnload[i].name}");
+          yield return toUnload[i].Unload();
+        }
+      }
     }
 
     private IEnumerator ChangeMap(Constants.Map newMap)

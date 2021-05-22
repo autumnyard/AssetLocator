@@ -12,6 +12,9 @@ namespace AutumnYard
 
     bool IsLoaded { get; }
 
+    void SetFlagRemain();
+    bool CheckFlagRemain();
+
     IEnumerator Load();
     IEnumerator Unload();
   }

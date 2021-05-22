@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 
 namespace AutumnYard
 {
-  public abstract class BaseDictionaryAssetLocator<T> : ScriptableObject, ILoader, IDictionaryAssetLocator<T>
+  public abstract class BaseDictionaryAssetLocator<T> : Loader, IDictionaryAssetLocator<T>
     where T : UnityEngine.Object
   {
 
@@ -38,8 +38,11 @@ namespace AutumnYard
 
     private void OnEnable()
     {
+      if (data == null) return;
+
       data.Clear();
       data = null;
+      IsLoaded = false;
     }
 
     private void OnValidate()
@@ -51,14 +54,13 @@ namespace AutumnYard
 
     #region ILoader
 
-    public bool IsLoaded => throw new NotImplementedException();
+    public override event Action OnUnloadingBegin;
+    public override event Action OnUnloadingFinish;
+    public override event Action OnLoadingBegin;
+    public override event Action OnLoadingFinish;
 
-    public event Action OnUnloadingBegin;
-    public event Action OnUnloadingFinish;
-    public event Action OnLoadingBegin;
-    public event Action OnLoadingFinish;
 
-    public IEnumerator Load()
+    public override IEnumerator Load()
     {
       if (data != null && data.Count > 0)
       {
@@ -68,14 +70,21 @@ namespace AutumnYard
 
       if (string.IsNullOrEmpty(label.labelString)) throw new NullReferenceException($"Invalid AssetLabelReference in {name}");
 
+      Log($"Begin loading {name}...");
+      OnLoadingBegin?.Invoke();
+
       data = new Dictionary<string, T>();
       asyncHandle = Addressables.LoadAssetsAsync<T>(label, HandleAssetLoad);
       yield return asyncHandle;
 
+      Log($"  ... finished!");
+      OnLoadingFinish?.Invoke();
+      IsLoaded = true;
+
       void HandleAssetLoad(T asset) => data.Add(asset.name.ToLower(), asset);
     }
 
-    public IEnumerator Unload()
+    public override IEnumerator Unload()
     {
       // TODO: Issue #6: Unload assets
       throw new NotImplementedException("Unloading assets");

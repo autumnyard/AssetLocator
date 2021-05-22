@@ -152,11 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f21a7ccdf0e75b478b53e5d6afa670d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assetManager: {fileID: 11400000, guid: 989030ce3f2ba4f42854e1e1ee0dce25, type: 2}
   maps:
   - {fileID: 11400000, guid: 6286f9adfdc16244a90e513b695640fb, type: 2}
   - {fileID: 11400000, guid: 56d58f103f213324887f8be93667d036, type: 2}
   - {fileID: 11400000, guid: 4e88cc0ceb1899e49bb212942ab60ed9, type: 2}
-  enableTypes: 0
+  enableLoggingTypes: 0
 --- !u!4 &671782012
 Transform:
   m_ObjectHideFlags: 0

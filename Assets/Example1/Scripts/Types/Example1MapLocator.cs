@@ -17,7 +17,7 @@ namespace AutumnYard.Example1
     protected override IEnumerator LoadDependenciesOnly()
     {
       yield return CheckDependency(soundLocator);
-      yield return CheckDependency<GameObject, Constants.Structure>(structureLocator);
+      yield return CheckDependency<GameObject>(structureLocator);
     }
 
   }

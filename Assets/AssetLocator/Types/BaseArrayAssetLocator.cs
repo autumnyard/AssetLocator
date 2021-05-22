@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace AutumnYard
 {
-  public abstract class BaseArrayAssetLocator<T> : ScriptableObject, IArrayAssetLocator<T>
+  public abstract class BaseArrayAssetLocator<T> : Loader, IArrayAssetLocator<T>
     where T : UnityEngine.Object
   {
 
@@ -33,8 +33,10 @@ namespace AutumnYard
     private void OnEnable()
     {
       if (data == null) return;
+
       data.Clear();
       data = null;
+      IsLoaded = false;
     }
 
     private void OnValidate()
@@ -43,10 +45,15 @@ namespace AutumnYard
       Assert.AreNotEqual<string>(label.labelString, "default", $"Invalid AssetLabelReference in {name}");
     }
 
+    #region ILoader
 
-    #region IArrayAssetLocator
+    public override event Action OnUnloadingBegin;
+    public override event Action OnUnloadingFinish;
+    public override event Action OnLoadingBegin;
+    public override event Action OnLoadingFinish;
 
-    public IEnumerator Load<TEnum>() where TEnum : struct, Enum
+
+    public override IEnumerator Load()
     {
       if (data != null && data.Count > 0)
       {
@@ -57,23 +64,29 @@ namespace AutumnYard
       if (string.IsNullOrEmpty(label.labelString)) throw new NullReferenceException($"Invalid AssetLabelReference in {name}");
 
       Log($"Begin loading {name}...");
+      OnLoadingBegin?.Invoke();
 
-      int length = Enum.GetValues(typeof(TEnum)).Length - 1;
-
-      data = new List<T>(length);
+      data = new List<T>();
       asyncHandle = Addressables.LoadAssetsAsync<T>(label, HandleAssetLoad);
       yield return asyncHandle;
-      Assert.AreEqual(length, data.Count, $"Wrong number of assets in {name}"); // omit None
+
       Log($"  ... finished!");
+      OnLoadingFinish?.Invoke();
+      IsLoaded = true;
 
       void HandleAssetLoad(T asset) => data.Add(asset);
     }
 
-    public IEnumerator Unload()
+    public override IEnumerator Unload()
     {
       // TODO: Issue #6: Unload assets
       throw new NotImplementedException("Unloading assets");
     }
+
+    #endregion // ILoader
+
+
+    #region IArrayAssetLocator
 
     public T this[int which] => Get(which);
 
@@ -147,9 +160,5 @@ namespace AutumnYard
       Logger.LogError(text, Logger.Type.ArrayAssetLocator);
     }
 
-    public IEnumerator Load()
-    {
-      throw new NotImplementedException();
-    }
   }
 }
