@@ -16,11 +16,12 @@ namespace AutumnYard
     //  - Addressable Label, One by one: Process each assets as soon as it is loaded.
     //  - Addressable Label, In Batch: Wait for all assets to be loaded, and process in batch.
 
-    // TODO: Implement referencing the addressable asset by Folder Reference, instead of Label
+
+    // TODO: Issue #5: Implement referencing the addressable asset by Folder Reference, instead of Label
     //[SerializeField] protected AddressableReferenceMode referenceMode = AddressableReferenceMode.Label;
     //[SerializeField] protected AssetReferenceT<T> reference = null;
 
-    // TODO: Implement two load modes: One by one, and By batch
+    // TODO: Issue #4: Implement two load modes: One by one, and By batch
     //public enum AddressableLoadMode { OneByOne, InBatch }
     //[SerializeField] private AddressableLoadMode loadMode = AddressableLoadMode.OneByOne;
 
@@ -70,7 +71,8 @@ namespace AutumnYard
 
     public IEnumerator Unload()
     {
-      throw new NotImplementedException("Unloading assets"); // TODO: Unload assets
+      // TODO: Issue #6: Unload assets
+      throw new NotImplementedException("Unloading assets");
     }
 
     public T this[int which] => Get(which);
