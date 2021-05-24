@@ -6,6 +6,21 @@
 It provides a facade to the Addressables system, and an intuitive way to manage the assets in the project.
 
 
+## DISCLAIMER
+
+Writing this as of 2021-05-24
+There are a series of issues surrounding the usage of ScriptableObjects and Addressables, which may render working with this module quite messy.
+
+The issue in particular is referencing an AssetLocator from an Addressable. An addressable that does this creates an instance of the SO for itself, and may even create a duplicate inside the AssetBundle depending on how you use it. Also, unloading the addressable may unload its SO, which may make the unloading of the assets it references untriggerable. 
+
+The reading of the following threads is very encouraged if you plan on using addressables for the prefabs/scenes that reference the Locators:
+ - https://forum.unity.com/threads/scriptableobject-references-in-addressables.777155/
+ - https://forum.unity.com/threads/scriptableobject-asset-and-addressables.652525/
+ - https://forum.unity.com/threads/addressables-scriptable-objects-help.861919/
+
+One of the solutions in the first 2 threads I linked was creating a place to create the instances of the Locators, and provide them to whomever may need them. This, of course, can be referenced elsewhere. Which, most likely, will be done with a singleton. Nullifying the very purpose of this module, of avoiding a singleton!
+
+
 ## Goal
 - Provide a facade to work with Addressables in an easy and intuitive way.
 - Enforce a healthy workflow on the project of keeping track of the assets and their dependencies. This makes memory management and asset dependency a conscious part of the development cycle.
